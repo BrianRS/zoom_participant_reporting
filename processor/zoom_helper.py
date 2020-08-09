@@ -3,7 +3,7 @@ from requests import Response
 import requests
 import time
 from authlib.jose import jwt
-import syslog
+import sys
 
 
 class ZoomHelper:
@@ -23,7 +23,7 @@ class ZoomHelper:
         query_params: Dict[str, Union[int, str]] = {"page_size": 300}
         if next_page_token:
             query_params.update({"next_page_token": next_page_token})
-        syslog.syslog(f"Getting participants for {meeting_id}")
+        sys.stderr.write(f"Getting participants for {meeting_id}\n")
         r: Response = requests.get(url,
                                    headers={"Authorization": f"Bearer {jwt_token.decode('utf-8')}"},
                                    params=query_params)
@@ -48,9 +48,9 @@ class ZoomHelper:
     def get_meeting_details(self,
                             meeting_id: str,
                             jwt_token: bytes) -> Response:
-        url = f"{self.reports_url}/meetings/{meeting_id}"
+        url = f"{self.reports_url}/{meeting_id}"
 
-        syslog.syslog(f"Getting meeting details for {meeting_id}")
+        sys.stderr.write(f"Getting meeting details for {meeting_id}\n")
         r: Response = requests.get(url,
                                    headers={"Authorization": f"Bearer {jwt_token.decode('utf-8')}"})
         return r

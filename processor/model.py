@@ -6,14 +6,15 @@ class BaseModel(Model):
 
 
 class Meeting(BaseModel):
-    meeting_id = UUIDField(primary_key=True)
+    meeting_id = CharField(primary_key=True)
     topic = CharField()
 
 
 class MeetingInstance(BaseModel):
     uuid = UUIDField(primary_key=True)
-    meeting_id = ForeignKeyField(Meeting, backref='instances')
+    meeting = ForeignKeyField(Meeting, backref='instances')
     start_time = DateTimeField()
+    cached = BooleanField(default=False)
 
 
 class Participant(BaseModel):
@@ -23,8 +24,8 @@ class Participant(BaseModel):
 
 
 class Attendance(BaseModel):
-    meeting_instance_uuid = ForeignKeyField(MeetingInstance, backref='attendances')
-    participant_id = ForeignKeyField(Participant, backref='attendances')
+    meeting_instance = ForeignKeyField(MeetingInstance, backref='attendances')
+    participant = ForeignKeyField(Participant, backref='attendances')
 
 
 class ExecutionLog(BaseModel):
