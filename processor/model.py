@@ -8,13 +8,13 @@ class BaseModel(Model):
 class Meeting(BaseModel):
     meeting_id = CharField(primary_key=True)
     topic = CharField()
+    cached = BooleanField(default=False)
 
 
 class MeetingInstance(BaseModel):
-    uuid = UUIDField(primary_key=True)
+    uuid = CharField(primary_key=True)
     meeting = ForeignKeyField(Meeting, backref='instances')
     start_time = DateTimeField()
-    cached = BooleanField(default=False)
 
 
 class Participant(BaseModel):

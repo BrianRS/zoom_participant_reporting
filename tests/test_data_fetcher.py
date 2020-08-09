@@ -4,6 +4,7 @@ import json
 import uuid
 import datetime
 import random
+import sys
 
 from processor.data_fetcher import DataFetcher
 from processor.db_helper import DbHelper
@@ -19,14 +20,24 @@ def data_fetcher():
 
 
 @pytest.fixture()
-def meeting_instance():
+def meeting():
     meeting_id = str(random.randint(1, 2000))
     topic = f"topic for {meeting_id}"
-    meeting_instance_id = uuid.uuid1()
-    start_time = datetime.datetime(2020, 5, 17)
-    Meeting.create(meeting_id=meeting_id, topic=topic)
+    return Meeting.create(meeting_id=meeting_id, topic=topic)
+
+
+@pytest.fixture()
+def meeting_instance(meeting):
+    return meeting_instance_maker(meeting)
+
+
+def meeting_instance_maker(meeting, meeting_instance_id=None, start_time=None):
+    if meeting_instance_id is None:
+        meeting_instance_id = uuid.uuid1()
+    if start_time is None:
+        start_time = datetime.datetime(2020, 5, 17)
     meeting_instance = MeetingInstance.create(uuid=meeting_instance_id,
-                                              meeting_id=meeting_id,
+                                              meeting=meeting,
                                               start_time=start_time,
                                               cached=False)
     return meeting_instance
@@ -113,4 +124,54 @@ def test_get_meeting_details_cached_hit(data_fetcher):
     assert "13 topic" == meeting.topic
 
 
-# def test_get_past_meetings zoom-pass, zoom-fail, cached-fail, cached-success
+@responses.activate
+def test_fetch_past_meetings_zoom_401(data_fetcher, meeting):
+    base = data_fetcher.zoom.past_meetings_url
+    responses.add(responses.GET, f"{base}/{meeting.meeting_id}/instances",
+                  json={'error': 'unauthorized'}, status=401)
+    with pytest.raises(RuntimeError):
+        data_fetcher.fetch_past_meeting_instances(meeting)
+
+
+@responses.activate
+def test_fetch_past_meeting_instances_from_zoom_success(data_fetcher, meeting):
+    with open('tests/test_data/past_meetings.json') as f:
+        data = json.load(f)
+    base = data_fetcher.zoom.past_meetings_url
+    responses.add(responses.GET, f"{base}/{meeting.meeting_id}/instances",
+                  json=data, status=200)
+
+    meetings = data_fetcher.fetch_past_meeting_instances(meeting)
+    assert 7 == len(meetings)
+    assert meetings[0].uuid == "7yQY89iC7e70Wj6Um03ULQ=="
+    sys.stdout.write(meetings[0].start_time)
+    assert meetings[0].start_time == '2020-08-01T18:06:45Z'
+
+
+@responses.activate
+def test_fetch_past_meeting_existing_instance(data_fetcher, meeting):
+    with open('tests/test_data/past_meetings.json') as f:
+        data = json.load(f)
+    base = data_fetcher.zoom.past_meetings_url
+    responses.add(responses.GET, f"{base}/{meeting.meeting_id}/instances",
+                  json=data, status=200)
+
+    start_time = datetime.datetime(2020, 8, 16)
+    meeting_instance_uuid = "7yQY89iC7e70Wj6Um03ULQ=="
+    meeting_instance_maker(meeting, meeting_instance_uuid, start_time)
+
+    meetings = data_fetcher.fetch_past_meeting_instances(meeting)
+    assert 7 == len(meetings)
+    assert meetings[0].uuid == meeting_instance_uuid
+    assert meetings[0].start_time == start_time
+
+
+def test_get_past_meeting_instances_cache_hit(data_fetcher):
+    meeting = Meeting.create(meeting_id=9, topic="9 topic", cached=True)
+    meeting_instances = data_fetcher.fetch_past_meeting_instances_cached(meeting)
+
+    meeting_instance_maker(meeting)
+    meeting_instance_maker(meeting)
+
+    assert 2 == len(meeting_instances)
+

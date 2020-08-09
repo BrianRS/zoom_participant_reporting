@@ -53,12 +53,6 @@ class DataFetcher:
 
         return participants
 
-    def fetch_past_meeting_instances(self, meeting):
-        return self.fetch_past_meeting_instances_from_zoom(self, meeting)
-
-    def fetch_past_meeting_instances_from_zoom(self, meeting):
-        pass
-
     def fetch_meeting_details(self, meeting_id):
         meeting = Meeting.get_or_none(Meeting.meeting_id == meeting_id)
         if meeting is None:
@@ -76,6 +70,34 @@ class DataFetcher:
 
         sys.stderr.write(f"\nTopic: {topic} participants.\n")
         return meeting
+
+    def fetch_past_meeting_instances_cached(self, meeting):
+        """
+        We can't mark a Meeting object as cached, because they're not idempotent in the server.
+        If we want to retrieve past meeting instances from DB, we must explicitly call this method.
+        """
+        return MeetingInstance.select().where(MeetingInstance.meeting == meeting)
+
+    def fetch_past_meeting_instances(self, meeting):
+        response = self.zoom.get_past_meeting_instances(meeting.meeting_id, self.jwt_token)
+        if not response.ok:
+            sys.stderr.write(f"Response failed with code {response.status_code} for meeting {meeting.meeting_id}")
+            raise RuntimeError
+
+        meetings = response.json().get("meetings")
+        meeting_instances = []
+        for m in meetings:
+            start_time = m["start_time"]
+            mi, created = MeetingInstance.get_or_create(uuid=m["uuid"], meeting=meeting,
+                                                        defaults={'start_time': start_time})
+            meeting_instances.append(mi)
+
+        # Cache
+        meeting.cached = True
+        meeting.save()
+
+        sys.stderr.write(f"\nFound: {len(meetings)} meeting instances for {meeting.meeting_id}.\n")
+        return meeting_instances
 
 
 if __name__ == "__main__":

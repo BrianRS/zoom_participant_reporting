@@ -12,6 +12,7 @@ class ZoomHelper:
         self.api_secret = api_secret
         self.base_url = "https://api.zoom.us/v2"
         self.reports_url = f"{self.base_url}/report/meetings"
+        self.past_meetings_url = f"{self.base_url}/past_meetings"
         self.jwt_token_exp = 1800
         self.jwt_token_algo = "HS256"
 
@@ -53,4 +54,12 @@ class ZoomHelper:
         sys.stderr.write(f"Getting meeting details for {meeting_id}\n")
         r: Response = requests.get(url,
                                    headers={"Authorization": f"Bearer {jwt_token.decode('utf-8')}"})
+        return r
+
+    def get_past_meeting_instances(self,
+                                   meeting_id: str,
+                                   jwt_token: bytes) -> Response:
+        url = f"{self.past_meetings_url}/{meeting_id}/instances"
+        sys.stderr.write(f"Getting past meetings for {meeting_id}\n")
+        r: Response = requests.get(url, headers={"Authorization": f"Bearer {jwt_token.decode('utf-8')}"})
         return r

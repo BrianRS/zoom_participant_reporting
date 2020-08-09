@@ -1,0 +1,32 @@
+{
+    "meetings": [
+        {
+            "uuid": "7yQY89iC7e70Wj6Um03ULQ==",
+            "start_time": "2020-08-01T18:06:45Z"
+        },
+        {
+            "uuid": "8mfM3bNP7X6W7k7pdMOUXw==",
+            "start_time": "2020-07-04T18:03:14Z"
+        },
+        {
+            "uuid": "XpPi5wLlRlG279e7fYCn2g==",
+            "start_time": "2020-08-08T18:03:47Z"
+        },
+        {
+            "uuid": "YOW1IPq7QGiY71x7FxPD0w==",
+            "start_time": "2020-07-25T18:04:57Z"
+        },
+        {
+            "uuid": "k2y0hRm7S5GVt7I3hw85kQ==",
+            "start_time": "2020-07-18T18:07:27Z"
+        },
+        {
+            "uuid": "l6xP4I67Rwm6U74a4rt4IA==",
+            "start_time": "2020-06-27T18:04:12Z"
+        },
+        {
+            "uuid": "yh7deEZaR7yE1u9B7eGXHw==",
+            "start_time": "2020-07-11T18:05:55Z"
+        }
+    ]
+}
