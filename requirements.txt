@@ -4,3 +4,5 @@ requests
 authlib
 mocker
 mock
+pytest_mock
+responses

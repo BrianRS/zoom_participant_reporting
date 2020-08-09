@@ -44,3 +44,13 @@ class ZoomHelper:
         jwt_token: bytes = jwt.encode(header, jwt_payload, self.api_secret)
 
         return jwt_token
+
+    def get_meeting_details(self,
+                            meeting_id: str,
+                            jwt_token: bytes) -> Response:
+        url = f"{self.reports_url}/meetings/{meeting_id}"
+
+        syslog.syslog(f"Getting meeting details for {meeting_id}")
+        r: Response = requests.get(url,
+                                   headers={"Authorization": f"Bearer {jwt_token.decode('utf-8')}"})
+        return r

@@ -6,8 +6,8 @@ class BaseModel(Model):
 
 
 class Meeting(BaseModel):
-    id = UUIDField(primary_key=True)
-    name = CharField()
+    meeting_id = UUIDField(primary_key=True)
+    topic = CharField()
 
 
 class MeetingInstance(BaseModel):
@@ -17,7 +17,7 @@ class MeetingInstance(BaseModel):
 
 
 class Participant(BaseModel):
-    id = UUIDField(index=True)
+    user_id = CharField(index=True)
     name = CharField(null=True, index=True)
     email = CharField(null=True, index=True)
 
