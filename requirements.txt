@@ -1,2 +1,6 @@
 pytest
 peewee
+requests
+authlib
+mocker
+mock

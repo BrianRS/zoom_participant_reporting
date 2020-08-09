@@ -17,8 +17,9 @@ class MeetingInstance(BaseModel):
 
 
 class Participant(BaseModel):
-    name = CharField(null=True)
-    email = CharField(null=True)
+    id = UUIDField(index=True)
+    name = CharField(null=True, index=True)
+    email = CharField(null=True, index=True)
 
 
 class Attendance(BaseModel):
