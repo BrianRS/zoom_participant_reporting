@@ -33,7 +33,7 @@ if __name__ == "__main__":
     zoom_api_secret = os.environ.get("ZOOM_API_SECRET")
     zoom = ZoomHelper(zoom_api_key, zoom_api_secret)
 
-    fetcher = DataFetcher(db_helper, zoom_helper)
+    fetcher = DataFetcher(db, zoom)
 
     zoom_meeting_id = os.environ.get("ZOOM_MEETING_ID")
     db = "dev.db"

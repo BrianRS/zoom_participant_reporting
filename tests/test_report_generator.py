@@ -1,7 +1,3 @@
-import sys
-
-import pytest
-import responses
 from processor.report_generator import ReportGenerator
 
 from tests.conftest import make_meeting_instance, attend_meeting
@@ -26,7 +22,7 @@ def test_get_all_participants_meeting(data_fetcher, meeting, meeting_instance, m
 
     rep = rg.get_all_participants_for_meeting(meeting.meeting_id)
 
-    assert 2 == len(rep)
+    assert len(rep) == 2
 
     result_participants = rep[meeting_instance]
     assert 1 == len(result_participants)
@@ -35,5 +31,3 @@ def test_get_all_participants_meeting(data_fetcher, meeting, meeting_instance, m
     assert 2 == len(result_participants)
 
     data_fetcher.fetch_meeting_details.assert_called_with(meeting.meeting_id)
-
-

@@ -1,9 +1,16 @@
-from typing import Optional, Dict, Union, Any
-from requests import Response
-import requests
-import time
-from authlib.jose import jwt
 import sys
+import time
+from typing import Any, Dict, Optional, Union
+
+import requests
+from authlib.jose import jwt
+from requests import Response
+from ratelimit import limits
+
+# see https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits
+ONE_SECOND = 1
+HEAVY_CALLS = 9
+MEDIUM_CALLS = 19
 
 
 class ZoomHelper:
@@ -16,6 +23,7 @@ class ZoomHelper:
         self.jwt_token_exp = 1800
         self.jwt_token_algo = "HS256"
 
+    @limits(calls=HEAVY_CALLS, period=ONE_SECOND)
     def get_meeting_participants(self,
                                  meeting_id: str,
                                  jwt_token: bytes,
@@ -32,7 +40,6 @@ class ZoomHelper:
 
     def generate_jwt_token(self) -> bytes:
         iat = int(time.time())
-
         jwt_payload: Dict[str, Any] = {
             "aud": None,
             "iss": self.api_key,
@@ -41,21 +48,20 @@ class ZoomHelper:
         }
 
         header: Dict[str, str] = {"alg": self.jwt_token_algo}
-
         jwt_token: bytes = jwt.encode(header, jwt_payload, self.api_secret)
-
         return jwt_token
 
+    @limits(calls=HEAVY_CALLS, period=ONE_SECOND)
     def get_meeting_details(self,
                             meeting_id: str,
                             jwt_token: bytes) -> Response:
         url = f"{self.reports_url}/{meeting_id}"
 
         sys.stderr.write(f"Getting meeting details for {meeting_id}\n")
-        r: Response = requests.get(url,
-                                   headers={"Authorization": f"Bearer {jwt_token.decode('utf-8')}"})
+        r: Response = requests.get(url, headers={"Authorization": f"Bearer {jwt_token.decode('utf-8')}"})
         return r
 
+    @limits(calls=MEDIUM_CALLS, period=ONE_SECOND)
     def get_past_meeting_instances(self,
                                    meeting_id: str,
                                    jwt_token: bytes) -> Response:
