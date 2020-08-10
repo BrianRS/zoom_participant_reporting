@@ -1,53 +1,13 @@
 import pytest
 import responses
 import json
-import uuid
 import datetime
 import random
 import sys
 
-from processor.data_fetcher import DataFetcher
-from processor.db_helper import DbHelper
-from processor.model import MeetingInstance, Meeting, Participant, Attendance
-from processor.zoom_helper import ZoomHelper
+from processor.model import Meeting, Participant, Attendance
+from tests.conftest import make_meeting_instance, attend_meeting
 
-
-@pytest.fixture
-def data_fetcher():
-    db = DbHelper(':memory:')
-    zoom = ZoomHelper('test_key', 'test_secret')
-    return DataFetcher(db, zoom)
-
-
-@pytest.fixture()
-def meeting():
-    meeting_id = str(random.randint(1, 2000))
-    topic = f"topic for {meeting_id}"
-    return Meeting.create(meeting_id=meeting_id, topic=topic)
-
-
-@pytest.fixture()
-def meeting_instance(meeting):
-    return meeting_instance_maker(meeting)
-
-
-def meeting_instance_maker(meeting, meeting_instance_id=None, start_time=None):
-    if meeting_instance_id is None:
-        meeting_instance_id = uuid.uuid1()
-    if start_time is None:
-        start_time = datetime.datetime(2020, 5, 17)
-    meeting_instance = MeetingInstance.create(uuid=meeting_instance_id,
-                                              meeting=meeting,
-                                              start_time=start_time,
-                                              cached=False)
-    return meeting_instance
-
-
-def attend_meeting(meeting_instance, name, email=None):
-    user_id = str(random.randint(5000, 10000))
-    p = Participant.create(user_id=user_id, name=name)
-    a = Attendance.create(meeting_instance=meeting_instance, participant=p)
-    return p, a
 
 
 @responses.activate
@@ -158,7 +118,7 @@ def test_fetch_past_meeting_existing_instance(data_fetcher, meeting):
 
     start_time = datetime.datetime(2020, 8, 16)
     meeting_instance_uuid = "7yQY89iC7e70Wj6Um03ULQ=="
-    meeting_instance_maker(meeting, meeting_instance_uuid, start_time)
+    make_meeting_instance(meeting, meeting_instance_uuid, start_time)
 
     meetings = data_fetcher.fetch_past_meeting_instances(meeting)
     assert 7 == len(meetings)
@@ -170,8 +130,8 @@ def test_get_past_meeting_instances_cache_hit(data_fetcher):
     meeting = Meeting.create(meeting_id=9, topic="9 topic", cached=True)
     meeting_instances = data_fetcher.fetch_past_meeting_instances_cached(meeting)
 
-    meeting_instance_maker(meeting)
-    meeting_instance_maker(meeting)
+    make_meeting_instance(meeting)
+    make_meeting_instance(meeting)
 
     assert 2 == len(meeting_instances)
 

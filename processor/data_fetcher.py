@@ -71,7 +71,8 @@ class DataFetcher:
         sys.stderr.write(f"\nTopic: {topic} participants.\n")
         return meeting
 
-    def fetch_past_meeting_instances_cached(self, meeting):
+    @staticmethod
+    def fetch_past_meeting_instances_cached(meeting):
         """
         We can't mark a Meeting object as cached, because they're not idempotent in the server.
         If we want to retrieve past meeting instances from DB, we must explicitly call this method.
@@ -91,10 +92,6 @@ class DataFetcher:
             mi, created = MeetingInstance.get_or_create(uuid=m["uuid"], meeting=meeting,
                                                         defaults={'start_time': start_time})
             meeting_instances.append(mi)
-
-        # Cache
-        meeting.cached = True
-        meeting.save()
 
         sys.stderr.write(f"\nFound: {len(meetings)} meeting instances for {meeting.meeting_id}.\n")
         return meeting_instances
