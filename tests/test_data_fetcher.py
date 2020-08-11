@@ -2,12 +2,10 @@ import pytest
 import responses
 import json
 import datetime
-import random
 import sys
 
-from processor.model import Meeting, Participant, Attendance
-from tests.conftest import make_meeting_instance, attend_meeting
-
+from processor.model import Meeting
+from tests.conftest import make_meeting_instance, attend_meeting_with_new_participant
 
 
 @responses.activate
@@ -45,8 +43,8 @@ def test_get_participants_cache_hit_no_participants(data_fetcher, meeting_instan
 def test_get_participants_cache_hit_some_participants(data_fetcher, meeting_instance):
     meeting_instance.cached = True
     meeting_instance.save()
-    a, _ = attend_meeting(meeting_instance, "Alice")
-    b, _ = attend_meeting(meeting_instance, "Bob")
+    a, _ = attend_meeting_with_new_participant(meeting_instance, "Alice")
+    b, _ = attend_meeting_with_new_participant(meeting_instance, "Bob")
 
     ps = data_fetcher.fetch_meeting_participants(meeting_instance)
     assert 2 == len(ps)

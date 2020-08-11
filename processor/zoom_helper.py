@@ -14,10 +14,10 @@ MEDIUM_CALLS = 19
 
 
 class ZoomHelper:
-    def __init__(self, api_key: str, api_secret: str):
+    def __init__(self, base_url: str, api_key: str, api_secret: str):
         self.api_key = api_key
         self.api_secret = api_secret
-        self.base_url = "https://api.zoom.us/v2"
+        self.base_url = base_url
         self.reports_url = f"{self.base_url}/report/meetings"
         self.past_meetings_url = f"{self.base_url}/past_meetings"
         self.jwt_token_exp = 1800

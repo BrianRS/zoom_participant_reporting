@@ -14,6 +14,9 @@ pytest-mock = "*"
 [packages]
 requests = "*"
 Authlib = "*"
+ratelimit = "*"
+google-api-python-client = "*"
+pandas = "*"
 
 [requires]
 python_version = "3.8"
