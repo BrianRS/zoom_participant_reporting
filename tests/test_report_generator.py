@@ -56,9 +56,12 @@ def test_report_generation(report_generator, meeting, meeting_instance, mocker):
     report_generator.get_attendances.side_effect = [attendance_m1, attendance_m2]
 
     df = report_generator.generate_report([meeting.meeting_id, m2.meeting_id])
-    print(df.axes)
-    assert 4 == df.size
-    assert 1 == df.at[meeting.meeting_id, datetime.date(2020, 5, 17)]
-    assert 1 == df.at[m2.meeting_id, datetime.date(2020, 5, 17)]
-    assert 2 == df.at[meeting.meeting_id, datetime.date(2020, 5, 18)]
-    assert 0 == df.at[m2.meeting_id, datetime.date(2020, 5, 18)]
+    assert 6 == df.size
+
+    assert 1 == df.at[meeting.meeting_id, "2020-05-17"]
+    assert 1 == df.at[m2.meeting_id, "2020-05-17"]
+    assert meeting.topic == df.at[meeting.meeting_id, 'Name']
+
+    assert 2 == df.at[meeting.meeting_id, "2020-05-18"]
+    assert 0 == df.at[m2.meeting_id, "2020-05-18"]
+    assert m2.topic == df.at[m2.meeting_id, 'Name']

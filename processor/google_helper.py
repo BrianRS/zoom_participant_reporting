@@ -1,7 +1,9 @@
 from typing import List
+import json
 
 from google.oauth2 import service_account
 from googleapiclient import discovery
+from googleapiclient.errors import HttpError
 from pandas import DataFrame
 
 
@@ -12,7 +14,6 @@ class GoogleHelper:
         self.google_sheet_type = "application/vnd.google-apps.spreadsheet"
         self.creds = service_account.Credentials.from_service_account_file(self.service_account_file,
                                                                            scopes=self.scopes)
-        service_account.Credentials
         self.drive = discovery.build("drive", "v3", credentials=self.creds)
         self.sheets = discovery.build("sheets", "v4", credentials=self.creds)
 
@@ -22,6 +23,8 @@ class GoogleHelper:
         for x in folders.get("files"):
             if x.get("name") == folder_name:
                 return x.get("id")
+        print(f"Could not find folder {folder_name}")
+        raise RuntimeError
 
     def create_new_sheet(self, file_name: str, parent_folder_id: str) -> str:
         new_sheet_metadata = {
@@ -29,11 +32,19 @@ class GoogleHelper:
             "parents": [parent_folder_id],
             "mimeType": self.google_sheet_type
         }
-
-        new_sheet = self.drive.files().create(body=new_sheet_metadata).execute()
+        new_sheet = self.create_new_sheet_helper(new_sheet_metadata)
         print(new_sheet)
 
         return new_sheet.get("id")
+
+    def create_new_sheet_helper(self, new_sheet_metadata):
+        print(new_sheet_metadata)
+        try:
+            return self.drive.files().create(body=new_sheet_metadata).execute()
+        except HttpError as err:
+            if err.resp.get('content-type', '').startswith('application/json'):
+                reason = json.loads(err.content).get('error').get('errors')[0].get('reason')
+            raise err
 
     def insert_df_to_sheet(self, google_sheet_id: str, df: DataFrame) -> dict:
         response = self.sheets.spreadsheets().values().append(

@@ -2,7 +2,6 @@ import pytest
 import responses
 import json
 import datetime
-import sys
 
 from processor.model import Meeting
 from tests.conftest import make_meeting_instance, attend_meeting_with_new_participant
@@ -102,8 +101,7 @@ def test_fetch_past_meeting_instances_from_zoom_success(data_fetcher, meeting):
     meetings = data_fetcher.fetch_past_meeting_instances(meeting)
     assert 7 == len(meetings)
     assert meetings[0].uuid == "7yQY89iC7e70Wj6Um03ULQ=="
-    sys.stdout.write(meetings[0].start_time)
-    assert meetings[0].start_time == '2020-08-01T18:06:45Z'
+    assert meetings[0].start_time == datetime.datetime(2020, 8, 1, 18, 6, 45)
 
 
 @responses.activate

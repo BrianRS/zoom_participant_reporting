@@ -1,4 +1,3 @@
-import sys
 import time
 from typing import Any, Dict, Optional, Union
 
@@ -32,7 +31,7 @@ class ZoomHelper:
         query_params: Dict[str, Union[int, str]] = {"page_size": 300}
         if next_page_token:
             query_params.update({"next_page_token": next_page_token})
-        sys.stderr.write(f"Getting participants for {meeting_id}\n")
+        print(f"Getting participants for {meeting_id}")
         r: Response = requests.get(url,
                                    headers={"Authorization": f"Bearer {jwt_token.decode('utf-8')}"},
                                    params=query_params)
@@ -57,7 +56,7 @@ class ZoomHelper:
                             jwt_token: bytes) -> Response:
         url = f"{self.reports_url}/{meeting_id}"
 
-        sys.stderr.write(f"Getting meeting details for {meeting_id}\n")
+        print(f"\nGetting meeting details for {meeting_id}")
         r: Response = requests.get(url, headers={"Authorization": f"Bearer {jwt_token.decode('utf-8')}"})
         return r
 
@@ -66,6 +65,6 @@ class ZoomHelper:
                                    meeting_id: str,
                                    jwt_token: bytes) -> Response:
         url = f"{self.past_meetings_url}/{meeting_id}/instances"
-        sys.stderr.write(f"Getting past meetings for {meeting_id}\n")
+        print(f"Getting past meeting instances for {meeting_id}")
         r: Response = requests.get(url, headers={"Authorization": f"Bearer {jwt_token.decode('utf-8')}"})
         return r

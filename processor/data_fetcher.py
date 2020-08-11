@@ -1,5 +1,5 @@
 import os
-import sys
+import datetime
 
 from processor.db_helper import DbHelper
 from processor.model import Participant, MeetingInstance, Meeting, Attendance
@@ -20,7 +20,7 @@ class DataFetcher:
     def fetch_meeting_participants_from_zoom(self, meeting_instance):
         response = self.zoom.get_meeting_participants(meeting_instance.uuid, self.jwt_token)
         if not response.ok:
-            sys.stderr.write(f"Response failed with code {response.status_code} for meeting {meeting_instance.uuid}")
+            print(f"Response failed with code {response.status_code} for meeting {meeting_instance.uuid}")
             raise RuntimeError
 
         participants_json = response.json().get("participants")
@@ -31,21 +31,22 @@ class DataFetcher:
 
         participants = []
         participant_ids = set()
-        sys.stderr.write(f"\nReceived {len(participants_json)} participants.\n")
+        print(f"Received {len(participants_json)} participants.")
 
         # Create Participants and store their Attendance
         for p in participants_json:
             participant, created = Participant.get_or_create(user_id=p["id"],
                                                              name=p["name"],
                                                              email=p["user_email"])
+            if created:
+                print(f"Found a new participant: {participant.name}: {participant.email}")
             if participant.user_id not in participant_ids:
-                sys.stderr.write(f"Found participant: {p}\n")
                 participant_ids.add(participant.user_id)
                 participants.append(participant)
             Attendance.get_or_create(meeting_instance=meeting_instance,
                                      participant=participant)
 
-        sys.stderr.write(f"Found {len(participants)} unique participants.\n")
+        print(f"Found {len(participants)} unique participants.")
 
         # Cache the results
         meeting_instance.cached = True
@@ -62,13 +63,13 @@ class DataFetcher:
     def fetch_meeting_details_from_zoom(self, meeting_id):
         response = self.zoom.get_meeting_details(meeting_id, self.jwt_token)
         if not response.ok:
-            sys.stderr.write(f"Response failed with code {response.status_code} for meeting {meeting_id}")
+            print(f"Response failed with code {response.status_code} for meeting {meeting_id}")
             raise RuntimeError
 
         topic = response.json().get("topic")
         meeting, created = Meeting.get_or_create(meeting_id=meeting_id, topic=topic)
 
-        sys.stderr.write(f"\nTopic: {topic} participants.\n")
+        print(f"Topic: {topic} participants.")
         return meeting
 
     @staticmethod
@@ -82,18 +83,19 @@ class DataFetcher:
     def fetch_past_meeting_instances(self, meeting):
         response = self.zoom.get_past_meeting_instances(meeting.meeting_id, self.jwt_token)
         if not response.ok:
-            sys.stderr.write(f"Response failed with code {response.status_code} for meeting {meeting.meeting_id}")
+            print(f"Response failed with code {response.status_code} for meeting {meeting.meeting_id}")
             raise RuntimeError
 
         meetings = response.json().get("meetings")
         meeting_instances = []
         for m in meetings:
-            start_time = m["start_time"]
+            start_time_str = m["start_time"]
+            start_time = datetime.datetime.strptime(start_time_str, '%Y-%m-%dT%H:%M:%SZ')
             mi, created = MeetingInstance.get_or_create(uuid=m["uuid"], meeting=meeting,
                                                         defaults={'start_time': start_time})
             meeting_instances.append(mi)
 
-        sys.stderr.write(f"\nFound: {len(meetings)} meeting instances for {meeting.meeting_id}.\n")
+        print(f"Found {len(meetings)} meeting instances for {meeting.meeting_id}")
         return meeting_instances
 
 
@@ -109,4 +111,4 @@ if __name__ == "__main__":
     zoom_meeting_id = os.environ.get("ZOOM_MEETING_ID")
     result = fetcher.fetch_meeting_participants(zoom_meeting_id)
     for p in result:
-        sys.stdout.write(str(p.name) + '\n')
+        print(str(p.name) + '\n')
