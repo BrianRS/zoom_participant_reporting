@@ -5,6 +5,7 @@ import requests
 from authlib.jose import jwt
 from requests import Response
 from ratelimit import limits
+import urllib.parse
 
 # see https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits
 ONE_SECOND = 1
@@ -27,11 +28,20 @@ class ZoomHelper:
                                  meeting_id: str,
                                  jwt_token: bytes,
                                  next_page_token: Optional[str] = None) -> Response:
-        url = f"{self.reports_url}/{meeting_id}/participants"
+
+        encoded_meeting_id = str(meeting_id)
+        # Encode the meetingId twice to handle meetingIds that have slashes in them
+        # See https://devforum.zoom.us/t/uuid-with-a-slash-failed-get-meetings-info/10433/2
+        if '/' in encoded_meeting_id:
+            encoded_meeting_id = urllib.parse.quote_plus(meeting_id)
+            encoded_meeting_id = urllib.parse.quote_plus(encoded_meeting_id)
+
+        url = f"{self.reports_url}/{encoded_meeting_id}/participants"
+
         query_params: Dict[str, Union[int, str]] = {"page_size": 300}
         if next_page_token:
             query_params.update({"next_page_token": next_page_token})
-        print(f"Getting participants for {meeting_id}")
+        print(f"Zoom: Getting participants for {meeting_id}")
         r: Response = requests.get(url,
                                    headers={"Authorization": f"Bearer {jwt_token.decode('utf-8')}"},
                                    params=query_params)
@@ -56,7 +66,7 @@ class ZoomHelper:
                             jwt_token: bytes) -> Response:
         url = f"{self.reports_url}/{meeting_id}"
 
-        print(f"\nGetting meeting details for {meeting_id}")
+        print(f"Zoom: Getting meeting details for {meeting_id}")
         r: Response = requests.get(url, headers={"Authorization": f"Bearer {jwt_token.decode('utf-8')}"})
         return r
 
@@ -65,6 +75,6 @@ class ZoomHelper:
                                    meeting_id: str,
                                    jwt_token: bytes) -> Response:
         url = f"{self.past_meetings_url}/{meeting_id}/instances"
-        print(f"Getting past meeting instances for {meeting_id}")
+        print(f"Zoom: Getting past meeting instances for {meeting_id}")
         r: Response = requests.get(url, headers={"Authorization": f"Bearer {jwt_token.decode('utf-8')}"})
         return r

@@ -5,7 +5,6 @@ import random
 
 from processor.data_fetcher import DataFetcher
 from processor.db_helper import DbHelper
-from processor.google_helper import GoogleHelper
 from processor.model import MeetingInstance, Meeting, Participant, Attendance
 from processor.report_generator import ReportGenerator
 from processor.zoom_helper import ZoomHelper
@@ -34,14 +33,14 @@ def meeting_instance(meeting):
     return make_meeting_instance(meeting)
 
 
-class TestGoogleHelper():
+class TestGoogleHelper:
     def __init__(self, service_account_file, scopes):
         self.service_account_file = service_account_file
         self.scopes = scopes
 
 
 @pytest.fixture()
-def google_helper(mocker):
+def google_helper():
     return TestGoogleHelper("test_file.json", [])
 
 

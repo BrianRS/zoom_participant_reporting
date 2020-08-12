@@ -1,7 +1,6 @@
 import os
 import sys
 import datetime
-import json
 from typing import Dict, List
 
 import pandas as pd
@@ -55,6 +54,44 @@ class ReportGenerator:
         df = df.fillna(0)
         return df
 
+    @staticmethod
+    def dataframe_to_array(df):
+        rows, cols = df.shape
+
+        names = df.pop(TOPIC_COLUMN)
+        values_dict = df.to_dict()
+
+        # Create all the rows, and add one for the headers row
+        values = [['Meeting ID', TOPIC_COLUMN]]
+
+        # Populate the content of header row up to the dates
+        header_row = 0
+
+        # Populate the first and second columns (Meeting Ids, Names) across all rows
+        row_name_to_num = {}
+        row_counter = 1
+        for meeting_id, name in names.iteritems():
+            # Add a row for each meeting
+            row = [meeting_id, name]
+            values.append(row)
+
+            # Keep a mapping of each row name to its position
+            row_name_to_num[meeting_id] = row_counter
+            row_counter += 1
+
+        # Sort the dates
+        dates = list(values_dict.keys())
+        dates.sort()
+
+        for date in dates:
+            date_values = values_dict[date]
+            values[header_row].append(date)
+            for row_name, value in date_values.items():
+                row = row_name_to_num[row_name]
+                values[row].append(value)
+
+        return values
+
     def upload_report(self, report, run_date):
         output_file = f"zoom_report_{run_date}"
         folder_id = self.google.get_folder_id("CA Reports")
@@ -88,15 +125,14 @@ def main():
     service_account_file = f".secrets/{os.listdir('.secrets')[0]}"
     google_helper = GoogleHelper(service_account_file, SCOPES)
 
-    fetcher = DataFetcher(db, zoom)
-
-    df = DataFetcher(db, zoom)
-    rg = ReportGenerator(df, google_helper)
+    data_fetcher = DataFetcher(db, zoom)
+    rg = ReportGenerator(data_fetcher, google_helper)
     report = rg.generate_report(meeting_ids)
+    values = rg.dataframe_to_array(report)
 
     run_date = datetime.datetime.now().date().strftime('%Y-%m-%d')
 
-    return rg.upload_report(report, run_date)
+    return rg.upload_report(values, run_date)
 
 
 if __name__ == "__main__":

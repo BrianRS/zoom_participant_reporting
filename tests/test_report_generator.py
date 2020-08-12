@@ -1,7 +1,9 @@
 import responses
 import datetime
+import pandas as pd
 
 from processor.model import Meeting
+from processor.report_generator import ReportGenerator
 
 from tests.conftest import make_meeting_instance, attend_meeting_with_new_participant
 from tests.conftest import attend_meeting_with_existing_participant
@@ -65,3 +67,24 @@ def test_report_generation(report_generator, meeting, meeting_instance, mocker):
     assert 2 == df.at[meeting.meeting_id, "2020-05-18"]
     assert 0 == df.at[m2.meeting_id, "2020-05-18"]
     assert m2.topic == df.at[m2.meeting_id, 'Name']
+
+
+def test_dataframe_to_array():
+    values_dict = {'Name': {'meeting_1': 'topic 1', 'meeting_2': 'topic 2'},
+                   "2020-08-01": {'meeting_1': 1.0, 'meeting_2': 3.0},
+                   "2020-08-02": {'meeting_1': 2.0, 'meeting_2': 0.0}}
+    df = pd.DataFrame(values_dict)
+    expected = [['Meeting ID', 'Name', "2020-08-01", "2020-08-02"], ['meeting_1', 'topic 1', 1.0, 2.0], ['meeting_2', 'topic 2', 3.0, 0.0]]
+    assert ReportGenerator.dataframe_to_array(df) == expected
+
+
+def test_dataframe_to_array_sorted():
+    values_dict = {'Name': {'meeting_1': 'topic 1', 'meeting_2': 'topic 2'},
+                   "2020-08-01": {'meeting_1': 1.0, 'meeting_2': 3.0},
+                   "2020-08-03": {'meeting_1': 3.0, 'meeting_2': 1.0},
+                   "2020-08-02": {'meeting_1': 2.0, 'meeting_2': 0.0}}
+    df = pd.DataFrame(values_dict)
+    expected = [['Meeting ID', 'Name', "2020-08-01", "2020-08-02", "2020-08-03"],
+                ['meeting_1', 'topic 1', 1.0, 2.0, 3.0],
+                ['meeting_2', 'topic 2', 3.0, 0.0, 1.0]]
+    assert ReportGenerator.dataframe_to_array(df) == expected

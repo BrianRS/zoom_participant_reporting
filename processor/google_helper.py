@@ -44,15 +44,16 @@ class GoogleHelper:
         except HttpError as err:
             if err.resp.get('content-type', '').startswith('application/json'):
                 reason = json.loads(err.content).get('error').get('errors')[0].get('reason')
+                print(reason)
             raise err
 
-    def insert_df_to_sheet(self, google_sheet_id: str, df: DataFrame) -> dict:
+    def insert_df_to_sheet(self, google_sheet_id: str, values: List) -> dict:
         response = self.sheets.spreadsheets().values().append(
                 spreadsheetId=google_sheet_id,
                 valueInputOption="RAW",
                 range="A1",
                 body={"majorDimension": "ROWS",
-                      "values": df.T.reset_index().T.values.tolist()}
+                      "values": values}
         ).execute()
 
         return response

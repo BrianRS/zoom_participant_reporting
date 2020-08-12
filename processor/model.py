@@ -9,6 +9,7 @@ class Meeting(BaseModel):
     meeting_id = CharField(primary_key=True)
     topic = CharField()
 
+
 class MeetingInstance(BaseModel):
     uuid = CharField(primary_key=True)
     meeting = ForeignKeyField(Meeting, backref='instances')

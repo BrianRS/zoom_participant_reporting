@@ -1,9 +1,6 @@
-import os
 import datetime
 
-from processor.db_helper import DbHelper
 from processor.model import Participant, MeetingInstance, Meeting, Attendance
-from processor.zoom_helper import ZoomHelper
 
 
 class DataFetcher:
@@ -97,18 +94,3 @@ class DataFetcher:
 
         print(f"Found {len(meetings)} meeting instances for {meeting.meeting_id}")
         return meeting_instances
-
-
-if __name__ == "__main__":
-    db_helper = DbHelper("dev.db")
-
-    zoom_api_key = os.environ.get("ZOOM_API_KEY")
-    zoom_api_secret = os.environ.get("ZOOM_API_SECRET")
-    zoom_helper = ZoomHelper(zoom_api_key, zoom_api_secret)
-
-    fetcher = DataFetcher(db_helper, zoom_helper)
-
-    zoom_meeting_id = os.environ.get("ZOOM_MEETING_ID")
-    result = fetcher.fetch_meeting_participants(zoom_meeting_id)
-    for p in result:
-        print(str(p.name) + '\n')
