@@ -26,30 +26,47 @@ class DataFetcher:
             response = self.zoom.get_meeting_participants(meeting_instance.uuid, self.jwt_token, token)
             participants_json += response.json().get("participants")
 
-        participants = []
-        participant_ids = set()
-        print(f"Received {len(participants_json)} participants.")
-
         # Create Participants and store their Attendance
-        for p in participants_json:
-            participant, created = Participant.get_or_create(user_id=p["id"],
-                                                             name=p["name"],
-                                                             email=p["user_email"])
-            if created:
-                print(f"Found a new participant: {participant.name}: {participant.email}")
-            if participant.user_id not in participant_ids:
-                participant_ids.add(participant.user_id)
-                participants.append(participant)
-            Attendance.get_or_create(meeting_instance=meeting_instance,
-                                     participant=participant)
-
-        print(f"Found {len(participants)} unique participants.")
+        participants = self.get_unique_participants(meeting_instance, participants_json)
 
         # Cache the results
         meeting_instance.cached = True
         meeting_instance.save()
 
         return participants
+
+    def get_unique_participants(self, meeting_instance, participants_json):
+        participants = []
+        participant_names = set()
+        for p in participants_json:
+            participant, created = self.get_or_create_participant(p)
+            if created:
+                print(f"Found a new participant: {participant.name}: {participant.email}")
+            if participant.name not in participant_names:
+                participant_names.add(participant.name)
+                participants.append(participant)
+                Attendance.get_or_create(meeting_instance=meeting_instance,
+                                         participant=participant)
+
+        print(f"{len(participants)} unique participants.")
+        return participants
+
+    @staticmethod
+    def get_or_create_participant(participant):
+        if participant["user_email"] != "":
+            # Detect name changes by same email
+            return Participant.get_or_create(email=participant["user_email"],
+                                             defaults={'user_id': participant["id"],
+                                                       'name': participant["name"]})
+        if participant["name"] != "":
+            # If no email, fallback to just the name
+            return Participant.get_or_create(name=participant["name"],
+                                             defaults={'user_id': participant["id"],
+                                                       'email': participant["user_email"]})
+        return Participant.get_or_create(name=participant["name"],
+                                         email=participant["user_email"],
+                                         user_id=participant["id"])
+
 
     def fetch_meeting_details(self, meeting_id):
         meeting = Meeting.get_or_none(Meeting.meeting_id == meeting_id)

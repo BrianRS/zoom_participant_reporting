@@ -18,7 +18,7 @@ class MeetingInstance(BaseModel):
 
 
 class Participant(BaseModel):
-    user_id = CharField(index=True)
+    user_id = CharField()
     name = CharField(null=True, index=True)
     email = CharField(null=True, index=True)
 

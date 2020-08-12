@@ -3,7 +3,7 @@ import responses
 import json
 import datetime
 
-from processor.model import Meeting
+from processor.model import Meeting, Participant
 from tests.conftest import make_meeting_instance, attend_meeting_with_new_participant
 
 
@@ -17,7 +17,7 @@ def test_get_participants_401(data_fetcher, meeting_instance):
 
 
 @responses.activate
-def test_get_participants_unique(data_fetcher, meeting_instance):
+def test_get_participants(data_fetcher, meeting_instance):
     with open('tests/test_data/past_participants_report.json') as f:
         data = json.load(f)
 
@@ -130,4 +130,33 @@ def test_get_past_meeting_instances_cache_hit(data_fetcher):
     make_meeting_instance(meeting)
 
     assert 2 == len(meeting_instances)
+
+
+@responses.activate
+def test_detect_duplicate_names_in_meeting(data_fetcher, meeting_instance):
+    with open('tests/test_data/past_participants_duplicates.json') as f:
+        data = json.load(f)
+    ps = data_fetcher.get_unique_participants(meeting_instance, data.get("participants"))
+
+    assert 15 == len(ps)
+
+
+def test_detect_name_change_same_email(data_fetcher, meeting_instance):
+    with open('tests/test_data/past_participants_name_change.json') as f:
+        data = json.load(f)
+    ps = data_fetcher.get_unique_participants(meeting_instance, data.get("participants"))
+
+    assert 14 == len(ps)
+
+
+def test_does_not_create_new_participant_if_name_already_exists(data_fetcher, meeting_instance):
+    data = [{"id": "1", "name": "Alice", "user_email": ""}]
+    p = Participant.create(name="Alice", user_id="1")
+    ps = data_fetcher.get_unique_participants(meeting_instance, data)
+
+    assert 1 == len(ps)
+    assert 1 == Participant.select().count()
+
+
+
 

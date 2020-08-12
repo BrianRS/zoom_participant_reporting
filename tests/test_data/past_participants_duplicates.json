@@ -1,0 +1,398 @@
+{
+    "page_count": 1,
+    "page_size": 200,
+    "total_records": 39,
+    "next_page_token": "",
+    "participants": [
+        {
+            "id": "4hZu08-bRseF0pCvqEqlNg",
+            "user_id": "16778240",
+            "name": "CircleAnywhere Sessions Evens",
+            "user_email": "circleanywhere.calendar@gmail.com",
+            "join_time": "2020-08-07T21:57:27Z",
+            "leave_time": "2020-08-07T23:04:03Z",
+            "duration": 3996,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "yb6JpVHwTM6zv7xabg8FPA",
+            "user_id": "16779264",
+            "name": "Marc Marshall",
+            "user_email": "marc@hypnomarc.com",
+            "join_time": "2020-08-07T21:57:47Z",
+            "leave_time": "2020-08-07T22:00:07Z",
+            "duration": 140,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "d7PPqJT5RAmnjydFaCjUkA",
+            "user_id": "16780288",
+            "name": "Pat Coulston",
+            "user_email": "",
+            "join_time": "2020-08-07T21:57:50Z",
+            "leave_time": "2020-08-07T22:00:04Z",
+            "duration": 134,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "a8uDL_x9RWCPTX1AggjRgw",
+            "user_id": "16781312",
+            "name": "Ross Callahan",
+            "user_email": "rosscallahanpsyd@gmail.com",
+            "join_time": "2020-08-07T21:57:57Z",
+            "leave_time": "2020-08-07T22:00:05Z",
+            "duration": 128,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "dKsqAy9sQRmpZhZPhfJdYA",
+            "user_id": "16782336",
+            "name": "maybe david",
+            "user_email": "",
+            "join_time": "2020-08-07T21:58:01Z",
+            "leave_time": "2020-08-07T22:00:04Z",
+            "duration": 123,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "cxwaJ7OQQ06MN3qDjUM-dg",
+            "user_id": "16783360",
+            "name": "Thea Kremser",
+            "user_email": "",
+            "join_time": "2020-08-07T21:58:10Z",
+            "leave_time": "2020-08-07T22:00:08Z",
+            "duration": 118,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "xKTbi09KQ9Ss4KccBbkU8w",
+            "user_id": "16784384",
+            "name": "Rosalie Marktl",
+            "user_email": "",
+            "join_time": "2020-08-07T21:59:11Z",
+            "leave_time": "2020-08-07T22:00:06Z",
+            "duration": 55,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "O_vvLGheSyGQaFJzNSnbhA",
+            "user_id": "16785408",
+            "name": "Kim",
+            "user_email": "",
+            "join_time": "2020-08-07T21:59:13Z",
+            "leave_time": "2020-08-07T22:00:04Z",
+            "duration": 51,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "cV6TKc-UTm2swvg_ZH-f3w",
+            "user_id": "16786432",
+            "name": "Zachary Farber",
+            "user_email": "prozach805@gmail.com",
+            "join_time": "2020-08-07T21:59:27Z",
+            "leave_time": "2020-08-07T22:00:05Z",
+            "duration": 38,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "qAcLZkbURrCoy8C25F_Lzg",
+            "user_id": "16787456",
+            "name": "Alex",
+            "user_email": "alexperrone@gmail.com",
+            "join_time": "2020-08-07T21:59:33Z",
+            "leave_time": "2020-08-07T22:00:04Z",
+            "duration": 31,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "8h8YO-foRqqorU-ZyTz8OA",
+            "user_id": "16788480",
+            "name": "Danielle Leff",
+            "user_email": "danielleleff@gmail.com",
+            "join_time": "2020-08-07T21:59:47Z",
+            "leave_time": "2020-08-07T22:00:10Z",
+            "duration": 23,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "d7PPqJT5RAmnjydFaCjUkA",
+            "user_id": "16789504",
+            "name": "Pat Coulston",
+            "user_email": "",
+            "join_time": "2020-08-07T22:00:04Z",
+            "leave_time": "2020-08-07T23:04:03Z",
+            "duration": 3839,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "O_vvLGheSyGQaFJzNSnbhA",
+            "user_id": "16790528",
+            "name": "Kim",
+            "user_email": "",
+            "join_time": "2020-08-07T22:00:05Z",
+            "leave_time": "2020-08-07T23:04:03Z",
+            "duration": 3838,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "qAcLZkbURrCoy8C25F_Lzg",
+            "user_id": "16791552",
+            "name": "Alex",
+            "user_email": "alexperrone@gmail.com",
+            "join_time": "2020-08-07T22:00:05Z",
+            "leave_time": "2020-08-07T23:03:59Z",
+            "duration": 3834,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "dKsqAy9sQRmpZhZPhfJdYA",
+            "user_id": "16792576",
+            "name": "maybe david",
+            "user_email": "",
+            "join_time": "2020-08-07T22:00:05Z",
+            "leave_time": "2020-08-07T23:04:03Z",
+            "duration": 3838,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "cV6TKc-UTm2swvg_ZH-f3w",
+            "user_id": "16793600",
+            "name": "Zachary Farber",
+            "user_email": "prozach805@gmail.com",
+            "join_time": "2020-08-07T22:00:06Z",
+            "leave_time": "2020-08-07T22:04:37Z",
+            "duration": 271,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "a8uDL_x9RWCPTX1AggjRgw",
+            "user_id": "16794624",
+            "name": "Ross Callahan",
+            "user_email": "rosscallahanpsyd@gmail.com",
+            "join_time": "2020-08-07T22:00:06Z",
+            "leave_time": "2020-08-07T23:03:52Z",
+            "duration": 3826,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "xKTbi09KQ9Ss4KccBbkU8w",
+            "user_id": "16795648",
+            "name": "Rosalie Marktl",
+            "user_email": "",
+            "join_time": "2020-08-07T22:00:07Z",
+            "leave_time": "2020-08-07T22:00:54Z",
+            "duration": 47,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "yb6JpVHwTM6zv7xabg8FPA",
+            "user_id": "16796672",
+            "name": "Marc Marshall",
+            "user_email": "marc@hypnomarc.com",
+            "join_time": "2020-08-07T22:00:08Z",
+            "leave_time": "2020-08-07T23:03:53Z",
+            "duration": 3825,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "cxwaJ7OQQ06MN3qDjUM-dg",
+            "user_id": "16797696",
+            "name": "Thea Kremser",
+            "user_email": "",
+            "join_time": "2020-08-07T22:00:08Z",
+            "leave_time": "2020-08-07T22:42:00Z",
+            "duration": 2512,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "8h8YO-foRqqorU-ZyTz8OA",
+            "user_id": "16798720",
+            "name": "Danielle Leff",
+            "user_email": "danielleleff@gmail.com",
+            "join_time": "2020-08-07T22:00:10Z",
+            "leave_time": "2020-08-07T22:01:59Z",
+            "duration": 109,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "9sMGG7EwSyWlQPrsK4tBKw",
+            "user_id": "16799744",
+            "name": "Yvonne yaya Sherajoycry",
+            "user_email": "lafondahome@gmail.com",
+            "join_time": "2020-08-07T22:01:24Z",
+            "leave_time": "2020-08-07T22:01:30Z",
+            "duration": 6,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "9sMGG7EwSyWlQPrsK4tBKw",
+            "user_id": "16800768",
+            "name": "Yvonne yaya Sherajoycry",
+            "user_email": "lafondahome@gmail.com",
+            "join_time": "2020-08-07T22:01:30Z",
+            "leave_time": "2020-08-07T22:30:47Z",
+            "duration": 1757,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "8h8YO-foRqqorU-ZyTz8OA",
+            "user_id": "16801792",
+            "name": "Danielle Leff",
+            "user_email": "danielleleff@gmail.com",
+            "join_time": "2020-08-07T22:02:01Z",
+            "leave_time": "2020-08-07T22:02:49Z",
+            "duration": 48,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "8h8YO-foRqqorU-ZyTz8OA",
+            "user_id": "16802816",
+            "name": "Danielle Leff",
+            "user_email": "danielleleff@gmail.com",
+            "join_time": "2020-08-07T22:03:04Z",
+            "leave_time": "2020-08-07T22:03:58Z",
+            "duration": 54,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "cV6TKc-UTm2swvg_ZH-f3w",
+            "user_id": "16803840",
+            "name": "Zachary Farber",
+            "user_email": "prozach805@gmail.com",
+            "join_time": "2020-08-07T22:04:37Z",
+            "leave_time": "2020-08-07T23:03:59Z",
+            "duration": 3562,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "V6UqacGeRYSl1OhAS7T5yg",
+            "user_id": "16804864",
+            "name": "Diana Ospina",
+            "user_email": "",
+            "join_time": "2020-08-07T22:06:13Z",
+            "leave_time": "2020-08-07T22:06:20Z",
+            "duration": 7,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "V6UqacGeRYSl1OhAS7T5yg",
+            "user_id": "16805888",
+            "name": "Diana Ospina",
+            "user_email": "",
+            "join_time": "2020-08-07T22:06:21Z",
+            "leave_time": "2020-08-07T23:04:03Z",
+            "duration": 3462,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "g0Lur-VfT4GcAgwhE6FSlw",
+            "user_id": "16806912",
+            "name": "Andres E.",
+            "user_email": "",
+            "join_time": "2020-08-07T22:08:15Z",
+            "leave_time": "2020-08-07T22:08:25Z",
+            "duration": 10,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "g0Lur-VfT4GcAgwhE6FSlw",
+            "user_id": "16807936",
+            "name": "Andres E.",
+            "user_email": "",
+            "join_time": "2020-08-07T22:08:26Z",
+            "leave_time": "2020-08-07T22:18:29Z",
+            "duration": 603,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "8h8YO-foRqqorU-ZyTz8OA",
+            "user_id": "16808960",
+            "name": "Danielle Leff",
+            "user_email": "danielleleff@gmail.com",
+            "join_time": "2020-08-07T22:09:07Z",
+            "leave_time": "2020-08-07T22:09:15Z",
+            "duration": 8,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "8h8YO-foRqqorU-ZyTz8OA",
+            "user_id": "16809984",
+            "name": "Danielle Leff",
+            "user_email": "danielleleff@gmail.com",
+            "join_time": "2020-08-07T22:09:16Z",
+            "leave_time": "2020-08-07T22:40:10Z",
+            "duration": 1854,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "PqotsLAvTEGSXS8VayIPgQ",
+            "user_id": "16811008",
+            "name": "Andres E.",
+            "user_email": "",
+            "join_time": "2020-08-07T22:26:42Z",
+            "leave_time": "2020-08-07T22:28:10Z",
+            "duration": 88,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "PqotsLAvTEGSXS8VayIPgQ",
+            "user_id": "16812032",
+            "name": "Andres E.",
+            "user_email": "",
+            "join_time": "2020-08-07T22:28:10Z",
+            "leave_time": "2020-08-07T22:43:57Z",
+            "duration": 947,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "8h8YO-foRqqorU-ZyTz8OA",
+            "user_id": "16813056",
+            "name": "Danielle Leff",
+            "user_email": "danielleleff@gmail.com",
+            "join_time": "2020-08-07T22:40:10Z",
+            "leave_time": "2020-08-07T22:43:50Z",
+            "duration": 220,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "cxwaJ7OQQ06MN3qDjUM-dg",
+            "user_id": "16814080",
+            "name": "Thea",
+            "user_email": "",
+            "join_time": "2020-08-07T22:42:08Z",
+            "leave_time": "2020-08-07T23:04:33Z",
+            "duration": 1345,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "UgfZxUqDSAeD7BemdlSVng",
+            "user_id": "16815104",
+            "name": "Andres E.",
+            "user_email": "anecca.iii@gmail.com",
+            "join_time": "2020-08-07T22:43:35Z",
+            "leave_time": "2020-08-07T22:43:46Z",
+            "duration": 11,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "UgfZxUqDSAeD7BemdlSVng",
+            "user_id": "16816128",
+            "name": "Andres E.",
+            "user_email": "anecca.iii@gmail.com",
+            "join_time": "2020-08-07T22:43:46Z",
+            "leave_time": "2020-08-07T23:03:59Z",
+            "duration": 1213,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "8h8YO-foRqqorU-ZyTz8OA",
+            "user_id": "16817152",
+            "name": "Danielle Leff",
+            "user_email": "danielleleff@gmail.com",
+            "join_time": "2020-08-07T22:44:07Z",
+            "leave_time": "2020-08-07T23:03:54Z",
+            "duration": 1187,
+            "attentiveness_score": ""
+        }
+    ]
+}

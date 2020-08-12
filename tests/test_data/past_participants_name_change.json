@@ -1,0 +1,398 @@
+{
+    "page_count": 1,
+    "page_size": 200,
+    "total_records": 39,
+    "next_page_token": "",
+    "participants": [
+        {
+            "id": "123408-bRseF0pCvqEqlNg",
+            "user_id": "55578240",
+            "name": "Official",
+            "user_email": "official.calendar@bmail.com",
+            "join_time": "2020-08-07T21:57:27Z",
+            "leave_time": "2020-08-07T23:04:03Z",
+            "duration": 3996,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "1234pVHwTM6zv7xabg8FPA",
+            "user_id": "55579264",
+            "name": "Alice",
+            "user_email": "alice@alicesite.com",
+            "join_time": "2020-08-07T21:57:47Z",
+            "leave_time": "2020-08-07T22:00:07Z",
+            "duration": 140,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "1234qJT5RAmnjydFaCjUkA",
+            "user_id": "55580288",
+            "name": "Bob McBob",
+            "user_email": "official.calendar@bmail.com",
+            "join_time": "2020-08-07T21:57:50Z",
+            "leave_time": "2020-08-07T22:00:04Z",
+            "duration": 134,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "1234L_x9RWCPTX1AggjRgw",
+            "user_id": "55581312",
+            "name": "Craig McCraig",
+            "user_email": "craigmccraig@bmail.com",
+            "join_time": "2020-08-07T21:57:57Z",
+            "leave_time": "2020-08-07T22:00:05Z",
+            "duration": 128,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "1234Ay9sQRmpZhZPhfJdYA",
+            "user_id": "55582336",
+            "name": "Dave Davidson",
+            "user_email": "",
+            "join_time": "2020-08-07T21:58:01Z",
+            "leave_time": "2020-08-07T22:00:04Z",
+            "duration": 123,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "1234J7OQQ06MN3qDjUM-dg",
+            "user_id": "55583360",
+            "name": "Elice Elipsis",
+            "user_email": "",
+            "join_time": "2020-08-07T21:58:10Z",
+            "leave_time": "2020-08-07T22:00:08Z",
+            "duration": 118,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "1234i09KQ9Ss4KccBbkU8w",
+            "user_id": "55584384",
+            "name": "Felicia Felix",
+            "user_email": "",
+            "join_time": "2020-08-07T21:59:11Z",
+            "leave_time": "2020-08-07T22:00:06Z",
+            "duration": 55,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "1234LGheSyGQaFJzNSnbhA",
+            "user_id": "55585408",
+            "name": "Gertrude",
+            "user_email": "",
+            "join_time": "2020-08-07T21:59:13Z",
+            "leave_time": "2020-08-07T22:00:04Z",
+            "duration": 51,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "1234Kc-UTm2swvg_ZH-f3w",
+            "user_id": "55586432",
+            "name": "Hello World",
+            "user_email": "helloworld@bmail.com",
+            "join_time": "2020-08-07T21:59:27Z",
+            "leave_time": "2020-08-07T22:00:05Z",
+            "duration": 38,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "1234ZkbURrCoy8C25F_Lzg",
+            "user_id": "55587456",
+            "name": "Ignatius",
+            "user_email": "ignatius@bmail.com",
+            "join_time": "2020-08-07T21:59:33Z",
+            "leave_time": "2020-08-07T22:00:04Z",
+            "duration": 31,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "1234O-foRqqorU-ZyTz8OA",
+            "user_id": "55588480",
+            "name": "Jeraldine Joss",
+            "user_email": "jeraldinejoss@bmail.com",
+            "join_time": "2020-08-07T21:59:47Z",
+            "leave_time": "2020-08-07T22:00:10Z",
+            "duration": 23,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "1234qJT5RAmnjydFaCjUkA",
+            "user_id": "55589504",
+            "name": "Bob McBob",
+            "user_email": "official.calendar@bmail.com",
+            "join_time": "2020-08-07T22:00:04Z",
+            "leave_time": "2020-08-07T23:04:03Z",
+            "duration": 3839,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "1234LGheSyGQaFJzNSnbhA",
+            "user_id": "55590528",
+            "name": "Gertrude",
+            "user_email": "",
+            "join_time": "2020-08-07T22:00:05Z",
+            "leave_time": "2020-08-07T23:04:03Z",
+            "duration": 3838,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "1234ZkbURrCoy8C25F_Lzg",
+            "user_id": "55591552",
+            "name": "Ignatius",
+            "user_email": "ignatius@bmail.com",
+            "join_time": "2020-08-07T22:00:05Z",
+            "leave_time": "2020-08-07T23:03:59Z",
+            "duration": 3834,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "1234Ay9sQRmpZhZPhfJdYA",
+            "user_id": "55592576",
+            "name": "Dave Davidson",
+            "user_email": "",
+            "join_time": "2020-08-07T22:00:05Z",
+            "leave_time": "2020-08-07T23:04:03Z",
+            "duration": 3838,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "1234Kc-UTm2swvg_ZH-f3w",
+            "user_id": "55593600",
+            "name": "Hello World",
+            "user_email": "helloworld@bmail.com",
+            "join_time": "2020-08-07T22:00:06Z",
+            "leave_time": "2020-08-07T22:04:37Z",
+            "duration": 271,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "1234L_x9RWCPTX1AggjRgw",
+            "user_id": "55594624",
+            "name": "Craig McCraig",
+            "user_email": "craigmccraig@bmail.com",
+            "join_time": "2020-08-07T22:00:06Z",
+            "leave_time": "2020-08-07T23:03:52Z",
+            "duration": 3826,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "1234i09KQ9Ss4KccBbkU8w",
+            "user_id": "55595648",
+            "name": "Felicia Felix",
+            "user_email": "",
+            "join_time": "2020-08-07T22:00:07Z",
+            "leave_time": "2020-08-07T22:00:54Z",
+            "duration": 47,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "1234pVHwTM6zv7xabg8FPA",
+            "user_id": "55596672",
+            "name": "Alice",
+            "user_email": "alice@alicesite.com",
+            "join_time": "2020-08-07T22:00:08Z",
+            "leave_time": "2020-08-07T23:03:53Z",
+            "duration": 3825,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "1234J7OQQ06MN3qDjUM-dg",
+            "user_id": "55597696",
+            "name": "Elice Elipsis",
+            "user_email": "",
+            "join_time": "2020-08-07T22:00:08Z",
+            "leave_time": "2020-08-07T22:42:00Z",
+            "duration": 2512,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "1234O-foRqqorU-ZyTz8OA",
+            "user_id": "55598720",
+            "name": "Jeraldine Joss",
+            "user_email": "jeraldinejoss@bmail.com",
+            "join_time": "2020-08-07T22:00:10Z",
+            "leave_time": "2020-08-07T22:01:59Z",
+            "duration": 109,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "1234G7EwSyWlQPrsK4tBKw",
+            "user_id": "55599744",
+            "name": "Kate Katies",
+            "user_email": "katekaties@bmail.com",
+            "join_time": "2020-08-07T22:01:24Z",
+            "leave_time": "2020-08-07T22:01:30Z",
+            "duration": 6,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "1234G7EwSyWlQPrsK4tBKw",
+            "user_id": "55500768",
+            "name": "Kate Katies",
+            "user_email": "katekaties@bmail.com",
+            "join_time": "2020-08-07T22:01:30Z",
+            "leave_time": "2020-08-07T22:30:47Z",
+            "duration": 1757,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "1234O-foRqqorU-ZyTz8OA",
+            "user_id": "55501792",
+            "name": "Jeraldine Joss",
+            "user_email": "jeraldinejoss@bmail.com",
+            "join_time": "2020-08-07T22:02:01Z",
+            "leave_time": "2020-08-07T22:02:49Z",
+            "duration": 48,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "1234O-foRqqorU-ZyTz8OA",
+            "user_id": "55502816",
+            "name": "Jeraldine Joss",
+            "user_email": "jeraldinejoss@bmail.com",
+            "join_time": "2020-08-07T22:03:04Z",
+            "leave_time": "2020-08-07T22:03:58Z",
+            "duration": 54,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "1234Kc-UTm2swvg_ZH-f3w",
+            "user_id": "55503840",
+            "name": "Hello World",
+            "user_email": "helloworld@bmail.com",
+            "join_time": "2020-08-07T22:04:37Z",
+            "leave_time": "2020-08-07T23:03:59Z",
+            "duration": 3562,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "1234acGeRYSl1OhAS7T5yg",
+            "user_id": "55504864",
+            "name": "Lize Lazy",
+            "user_email": "",
+            "join_time": "2020-08-07T22:06:13Z",
+            "leave_time": "2020-08-07T22:06:20Z",
+            "duration": 7,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "1234acGeRYSl1OhAS7T5yg",
+            "user_id": "55505888",
+            "name": "Lize Lazy",
+            "user_email": "",
+            "join_time": "2020-08-07T22:06:21Z",
+            "leave_time": "2020-08-07T23:04:03Z",
+            "duration": 3462,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "1234r-VfT4GcAgwhE6FSlw",
+            "user_id": "55506912",
+            "name": "Mario Mario",
+            "user_email": "",
+            "join_time": "2020-08-07T22:08:15Z",
+            "leave_time": "2020-08-07T22:08:25Z",
+            "duration": 10,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "1234r-VfT4GcAgwhE6FSlw",
+            "user_id": "55507936",
+            "name": "Mario Mario",
+            "user_email": "",
+            "join_time": "2020-08-07T22:08:26Z",
+            "leave_time": "2020-08-07T22:18:29Z",
+            "duration": 603,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "1234O-foRqqorU-ZyTz8OA",
+            "user_id": "55508960",
+            "name": "Jeraldine Joss",
+            "user_email": "jeraldinejoss@bmail.com",
+            "join_time": "2020-08-07T22:09:07Z",
+            "leave_time": "2020-08-07T22:09:15Z",
+            "duration": 8,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "1234O-foRqqorU-ZyTz8OA",
+            "user_id": "55509984",
+            "name": "Jeraldine Joss",
+            "user_email": "jeraldinejoss@bmail.com",
+            "join_time": "2020-08-07T22:09:16Z",
+            "leave_time": "2020-08-07T22:40:10Z",
+            "duration": 1854,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "1234sLAvTEGSXS8VayIPgQ",
+            "user_id": "55511008",
+            "name": "Mario Mario",
+            "user_email": "",
+            "join_time": "2020-08-07T22:26:42Z",
+            "leave_time": "2020-08-07T22:28:10Z",
+            "duration": 88,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "1234sLAvTEGSXS8VayIPgQ",
+            "user_id": "55512032",
+            "name": "Mario Mario",
+            "user_email": "",
+            "join_time": "2020-08-07T22:28:10Z",
+            "leave_time": "2020-08-07T22:43:57Z",
+            "duration": 947,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "1234O-foRqqorU-ZyTz8OA",
+            "user_id": "55513056",
+            "name": "Jeraldine Joss",
+            "user_email": "jeraldinejoss@bmail.com",
+            "join_time": "2020-08-07T22:40:10Z",
+            "leave_time": "2020-08-07T22:43:50Z",
+            "duration": 220,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "1234J7OQQ06MN3qDjUM-dg",
+            "user_id": "55514080",
+            "name": "Elise",
+            "user_email": "",
+            "join_time": "2020-08-07T22:42:08Z",
+            "leave_time": "2020-08-07T23:04:33Z",
+            "duration": 1345,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "1234xUqDSAeD7BemdlSVng",
+            "user_id": "55515104",
+            "name": "Mario Mario",
+            "user_email": "mario.iii@bmail.com",
+            "join_time": "2020-08-07T22:43:35Z",
+            "leave_time": "2020-08-07T22:43:46Z",
+            "duration": 11,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "1234xUqDSAeD7BemdlSVng",
+            "user_id": "55516128",
+            "name": "Mario Mario",
+            "user_email": "mario.iii@bmail.com",
+            "join_time": "2020-08-07T22:43:46Z",
+            "leave_time": "2020-08-07T23:03:59Z",
+            "duration": 1213,
+            "attentiveness_score": ""
+        },
+        {
+            "id": "1234O-foRqqorU-ZyTz8OA",
+            "user_id": "55517152",
+            "name": "Jeraldine Joss",
+            "user_email": "jeraldinejoss@bmail.com",
+            "join_time": "2020-08-07T22:44:07Z",
+            "leave_time": "2020-08-07T23:03:54Z",
+            "duration": 1187,
+            "attentiveness_score": ""
+        }
+    ]
+}
