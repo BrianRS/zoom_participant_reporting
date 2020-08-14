@@ -2,3 +2,4 @@ pytest.log
 raw_data/
 .secrets
 *.db
+.coverage

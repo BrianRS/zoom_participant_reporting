@@ -16,6 +16,7 @@ SCOPES = ["https://www.googleapis.com/auth/drive",
           "https://www.googleapis.com/auth/drive.file",
           "https://www.googleapis.com/auth/drive.metadata"]
 TOPIC_COLUMN = 'Name'
+AVG_COLUMN = 'Average'
 
 
 class ReportGenerator:
@@ -51,6 +52,10 @@ class ReportGenerator:
                 df.loc[meeting_id, date] = len(participants)
             df.loc[meeting_id, TOPIC_COLUMN] = meeting.topic
 
+        # Add average attendance
+        avg = df.mean(skipna=True, numeric_only=True, axis=1)
+        df[AVG_COLUMN] = avg
+
         df = df.fillna(0)
         return df
 
@@ -59,6 +64,7 @@ class ReportGenerator:
         rows, cols = df.shape
 
         names = df.pop(TOPIC_COLUMN)
+        averages = df.pop(AVG_COLUMN)
         values_dict = df.to_dict()
 
         # Create all the rows, and add one for the headers row
@@ -86,9 +92,18 @@ class ReportGenerator:
         for date in dates:
             date_values = values_dict[date]
             values[header_row].append(date)
+            # Add all the attendance numbers for each date
             for row_name, value in date_values.items():
                 row = row_name_to_num[row_name]
+                if value == 0:
+                    value = ''
                 values[row].append(value)
+
+        # Add the average at the end of the row
+        values[header_row].append(AVG_COLUMN)
+        for meeting_id, avg in averages.iteritems():
+            row_num = row_name_to_num[meeting_id]
+            values[row_num].append(avg)
 
         return values
 
