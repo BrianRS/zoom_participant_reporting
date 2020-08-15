@@ -67,7 +67,6 @@ class DataFetcher:
                                          email=participant["user_email"],
                                          user_id=participant["id"])
 
-
     def fetch_meeting_details(self, meeting_id):
         meeting = Meeting.get_or_none(Meeting.meeting_id == meeting_id)
         if meeting is None:

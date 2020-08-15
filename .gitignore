@@ -3,3 +3,4 @@ raw_data/
 .secrets
 *.db
 .coverage
+htmlcov/
