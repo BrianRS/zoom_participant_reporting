@@ -14,12 +14,12 @@
 
 3. Run:
 
-    pipenv shell
+        pipenv shell
     
-    export PYTHONPATH=.
-    export ZOOM_API_KEY=**Put API key here**
-    export ZOOM_API_SECRET=**Put API secret here**
-    python processor/report_generator.py prod.db meetings.txt
+        export PYTHONPATH=.
+        export ZOOM_API_KEY=**Put API key here**
+        export ZOOM_API_SECRET=**Put API secret here**
+        python processor/report_generator.py prod.db raw_data/meetings.txt
 
 
 ## Additional Info

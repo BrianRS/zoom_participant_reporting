@@ -35,4 +35,7 @@
     data_fetcher.fetch_meeting_participants(mi)
     data_fetcher.fetch_meeting_participants_from_zoom(mi)
 
-
+## Update Session Names in the Database
+    m = Meeting.select().where(Meeting.meeting_id == xxx).first()
+    m.topic = "set as desired"
+    m.save()
