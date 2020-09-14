@@ -12,14 +12,16 @@ from processor.google_helper import GoogleHelper
 from processor.model import MeetingInstance, Participant
 from processor.zoom_helper import ZoomHelper
 
-SCOPES = ["https://www.googleapis.com/auth/drive",
-          "https://www.googleapis.com/auth/drive.file",
-          "https://www.googleapis.com/auth/drive.metadata"]
-TOPIC_COLUMN = 'Name'
-AVG_COLUMN = 'Average'
-
 
 class ReportGenerator:
+    SCOPES = ["https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.file",
+              "https://www.googleapis.com/auth/drive.metadata"]
+    TOPIC_COLUMN = 'Name'
+    AVG_COLUMN = 'Average'
+    LAST_FOUR = 'Last Four Average'
+    ZOOM_URL = "https://api.zoom.us/v2"
+
     def __init__(self, data_fetcher, google_helper):
         self.data_fetcher = data_fetcher
         self.google = google_helper
@@ -41,7 +43,7 @@ class ReportGenerator:
         return result
 
     def generate_report(self, meeting_ids):
-        df = pd.DataFrame(data=[], columns=[TOPIC_COLUMN])
+        df = pd.DataFrame(data=[], columns=[self.TOPIC_COLUMN])
         for meeting_id in meeting_ids:
             attendances = self.get_attendances(meeting_id)
             meeting = self.data_fetcher.fetch_meeting_details(meeting_id)
@@ -50,11 +52,15 @@ class ReportGenerator:
                 # and the meeting id's and topics as the row names
                 date = meeting_instance.start_time.date().strftime('%Y-%m-%d')
                 df.loc[meeting_id, date] = len(participants)
-            df.loc[meeting_id, TOPIC_COLUMN] = meeting.topic
+            df.loc[meeting_id, self.TOPIC_COLUMN] = meeting.topic
 
-        # Add average attendance
+        # average attendance
         avg = df.mean(skipna=True, numeric_only=True, axis=1)
-        df[AVG_COLUMN] = avg
+
+        last_four = df.apply(lambda x: x.dropna().tail(-1).tail(4).mean(), axis=1)
+
+        df[self.AVG_COLUMN] = avg
+        df[self.LAST_FOUR] = last_four
 
         df = df.fillna(0)
         return df
@@ -63,12 +69,13 @@ class ReportGenerator:
     def dataframe_to_array(df):
         rows, cols = df.shape
 
-        names = df.pop(TOPIC_COLUMN)
-        averages = df.pop(AVG_COLUMN)
+        names = df.pop(ReportGenerator.TOPIC_COLUMN)
+        averages = df.pop(ReportGenerator.AVG_COLUMN)
+        last_fours = df.pop(ReportGenerator.LAST_FOUR)
         values_dict = df.to_dict()
 
         # Create all the rows, and add one for the headers row
-        values = [['Meeting ID', TOPIC_COLUMN]]
+        values = [['Meeting ID', ReportGenerator.TOPIC_COLUMN]]
 
         # Populate the content of header row up to the dates
         header_row = 0
@@ -100,8 +107,14 @@ class ReportGenerator:
                 values[row].append(value)
 
         # Add the average at the end of the row
-        values[header_row].append(AVG_COLUMN)
+        values[header_row].append(ReportGenerator.AVG_COLUMN)
         for meeting_id, avg in averages.iteritems():
+            row_num = row_name_to_num[meeting_id]
+            values[row_num].append(avg)
+
+        # Add the last four average at the end of the row
+        values[header_row].append(ReportGenerator.LAST_FOUR)
+        for meeting_id, avg in last_fours.iteritems():
             row_num = row_name_to_num[meeting_id]
             values[row_num].append(avg)
 
@@ -135,10 +148,10 @@ def main():
 
     db = DbHelper(db_name)
 
-    zoom = ZoomHelper("https://api.zoom.us/v2", zoom_api_key, zoom_api_secret)
+    zoom = ZoomHelper(ReportGenerator.ZOOM_URL, zoom_api_key, zoom_api_secret)
 
     service_account_file = f".secrets/{os.listdir('.secrets')[0]}"
-    google_helper = GoogleHelper(service_account_file, SCOPES)
+    google_helper = GoogleHelper(service_account_file, ReportGenerator.SCOPES)
 
     data_fetcher = DataFetcher(db, zoom)
     rg = ReportGenerator(data_fetcher, google_helper)

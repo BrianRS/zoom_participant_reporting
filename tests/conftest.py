@@ -68,6 +68,6 @@ def attend_meeting_with_new_participant(meeting_instance, name, email=None):
     return p, a
 
 
-def attend_meeting_with_existing_participant(meeting_instance, participant):
+def attend_meeting(meeting_instance, participant):
     return Attendance.create(meeting_instance=meeting_instance, participant=participant)
 

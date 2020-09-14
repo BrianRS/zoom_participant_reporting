@@ -4,3 +4,4 @@ raw_data/
 *.db
 .coverage
 htmlcov/
+run.sh
