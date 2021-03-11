@@ -120,6 +120,8 @@ def test_last_four_average(report_generator, mocker):
     mi_1_2 = make_meeting_instance(m1, "meeting instance 1_2", start_time=dt.datetime(2020, 5, 2))
     b, _ = attend_meeting_with_new_participant(mi_1_2, "b")
     c, _ = attend_meeting_with_new_participant(mi_1_2, "c")
+    d, _ = attend_meeting_with_new_participant(mi_1_2, "d")
+    e, _ = attend_meeting_with_new_participant(mi_1_2, "e")
 
     mi_1_3 = make_meeting_instance(m1, "meeting instance 1_3", start_time=dt.datetime(2020, 5, 3))
     mi_1_4 = make_meeting_instance(m1, "meeting instance 1_4", start_time=dt.datetime(2020, 5, 4))
@@ -132,7 +134,7 @@ def test_last_four_average(report_generator, mocker):
     mi_2_3 = make_meeting_instance(m2, "meeting instance 2_3", start_time=dt.datetime(2020, 5, 3))
 
     # Simulate attendances
-    attendance_m1 = {mi_1_1: [a], mi_1_2: [b, c], mi_1_3: [a, b], mi_1_4: [a, b], mi_1_5: [a, b]}
+    attendance_m1 = {mi_1_1: [a], mi_1_2: [b, c], mi_1_3: [a, b], mi_1_4: [a, b], mi_1_5: [a, b, c, d, e]}
     attendance_m2 = {mi_2_1: [a], mi_2_2: [b], mi_2_3: [c]}
 
     # mock the call to get_participants_for_meeting
@@ -145,9 +147,9 @@ def test_last_four_average(report_generator, mocker):
     assert 2 == df.at[m1.meeting_id, "2020-05-02"]
     assert 2 == df.at[m1.meeting_id, "2020-05-03"]
     avg = df.at[m1.meeting_id, ReportGenerator.AVG_COLUMN]
-    assert math.isclose(1.8, avg, rel_tol=1e-5)
+    assert math.isclose(2.4, avg, rel_tol=1e-5)
     avg = df.at[m1.meeting_id, ReportGenerator.LAST_FOUR]
-    assert math.isclose(2.0, avg, rel_tol=1e-5)
+    assert math.isclose(2.75, avg, rel_tol=1e-5)
 
     assert 1 == df.at[m2.meeting_id, "2020-05-01"]
     assert 1 == df.at[m2.meeting_id, "2020-05-02"]

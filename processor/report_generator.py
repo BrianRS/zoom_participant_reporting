@@ -42,6 +42,17 @@ class ReportGenerator:
 
         return result
 
+    @staticmethod
+    def avg_of_last_four(row):
+        # Drop non-session days (NaN)
+        # Drop the first element, which is not numeric (meeting topic)
+        # Sort by date
+        # Grab last four elements and take mean
+        row = row[1:].dropna()
+        row = row.sort_index(key=lambda x: pd.to_datetime(x))
+        print(row)
+        return row.tail(4).mean()
+
     def generate_report(self, meeting_ids):
         df = pd.DataFrame(data=[], columns=[self.TOPIC_COLUMN])
         for meeting_id in meeting_ids:
@@ -54,10 +65,10 @@ class ReportGenerator:
                 df.loc[meeting_id, date] = len(participants)
             df.loc[meeting_id, self.TOPIC_COLUMN] = meeting.topic
 
-        # average attendance
+        # average attendance per meeting
         avg = df.mean(skipna=True, numeric_only=True, axis=1)
 
-        last_four = df.apply(lambda x: x.dropna().tail(-1).tail(4).mean(), axis=1)
+        last_four = df.apply(ReportGenerator.avg_of_last_four, axis=1)
 
         df[self.AVG_COLUMN] = avg
         df[self.LAST_FOUR] = last_four

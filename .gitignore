@@ -5,3 +5,4 @@ raw_data/
 .coverage
 htmlcov/
 run.sh
+.pyc
